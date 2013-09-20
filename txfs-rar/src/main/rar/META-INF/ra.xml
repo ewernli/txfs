@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- $Id: ra.xml,v 1.7 2008/12/02 16:03:16 pmg Exp $ -->
+
+<connector xmlns="http://java.sun.com/xml/ns/j2ee"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+           http://java.sun.com/xml/ns/j2ee/connector_1_5.xsd"
+           version="1.5">
+
+    <description>A pseudo-transactional file system connector</description>
+    <display-name>Txfs</display-name>
+
+    <vendor-name>None</vendor-name>
+    <eis-type>File system</eis-type>
+    <resourceadapter-version>0.1</resourceadapter-version>
+
+    <license>
+        <description>
+        </description>
+        <license-required>true</license-required>
+    </license>
+
+    <resourceadapter>
+        <resourceadapter-class>org.ewe.txfs.TxfsResourceAdapter</resourceadapter-class>
+
+        <outbound-resourceadapter>
+
+            <connection-definition>
+
+                <managedconnectionfactory-class>org.ewe.txfs.impl.managed.TxfsManagedConnectionFactory</managedconnectionfactory-class>
+
+                <config-property>
+                    <description>The path to the root folder on file system</description>
+                    <config-property-name>rootPath</config-property-name>
+                    <config-property-type>java.lang.String</config-property-type>
+                </config-property>
+
+                <connectionfactory-interface>org.ewe.txfs.TxfsConnectionFactory</connectionfactory-interface>
+                <connectionfactory-impl-class>org.ewe.txfs.TxfsConnectionFactoryImpl</connectionfactory-impl-class>
+
+                <connection-interface>org.ewe.txfs.TxfsConnection</connection-interface>
+                <connection-impl-class>org.ewe.txfs.TxfsConnectionImpl</connection-impl-class>
+
+            </connection-definition>
+
+            <transaction-support>XATransaction</transaction-support>
+            <authentication-mechanism>
+                <authentication-mechanism-type>BasicPassword</authentication-mechanism-type>
+                <credential-interface>javax.resource.spi.security.PasswordCredential</credential-interface>
+            </authentication-mechanism>
+            <reauthentication-support>false</reauthentication-support>
+        </outbound-resourceadapter>
+
+    </resourceadapter>
+</connector>
